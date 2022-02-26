@@ -33,7 +33,7 @@ class Authenticate:
             },
     }
 
-def directory(module: str, name: str, file_type: str='.csv', library: str='/position_manager'):
+def directory(module: str, name: str, file_type: str='.csv', library: str='/position_manager_for_ftx'):
     for dir_ in [module]:
         split_ = module.split('/')
         split_module_combined = ''
@@ -52,7 +52,7 @@ class Position_Manager:
         self.auth = Authenticate.auth
         self.ftx_client = lambda id_: FtxClient(api_key=self.auth[id_]['key'], api_secret=self.auth[id_]['secret'], subaccount_name=self.auth[id_]['subaccount'])
         self.client = {}
-        self.wait_time_minutes = .05
+        self.wait_time_minutes = 1
         self.delay = int(self.wait_time_minutes * 60)
         for k in self.auth.keys():
             self.client[k] = self.ftx_client(k)
